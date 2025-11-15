@@ -4,7 +4,12 @@ import { Button } from '@/components/Button';
 
 export const metadata: Metadata = {
   title: 'Premium Indian & European Marble — Rab Noor Pvt Ltd',
-  description: 'Marbles Near Me delivers curated marble from India and Europe with end-to-end logistics support.'
+  description: 'Marbles Near Me delivers curated marble from India and Europe with end-to-end logistics support.',
+  openGraph: {
+    title: 'Marbles Near Me | Rab Noor Pvt Ltd',
+    description: 'Source Makrana White, Thassos, Statuario, and more with integrated logistics and QC.',
+    images: [{ url: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1600&q=80', alt: 'Luxury interior with marble surfaces' }]
+  }
 };
 
 const placeholderSections = [

@@ -1,20 +1,28 @@
-import { Container } from '@/components/Container';
+import type { Metadata } from 'next';
 import { PageHeader } from '@/components/PageHeader';
+import { RegionPlaybook } from '@/components/regions/RegionPlaybook';
+import { regionLandings } from '@/data/regions';
+
+const region = regionLandings.find((entry) => entry.slug === 'indian-marble-export-to-germany');
+
+export const metadata: Metadata = {
+  title: region ? region.title : 'Region',
+  description: region?.intro,
+  openGraph: {
+    title: region?.title || 'Region',
+    description: region?.intro || ''
+  }
+};
 
 export default function IndianMarbleToGermanyPage() {
+  if (!region) {
+    return null;
+  }
+
   return (
     <>
-      <PageHeader title="Indian Marble Export to Germany" description="Skeleton for DACH-focused messaging." />
-      <Container className="space-y-10 py-16">
-        <section>
-          <h2 className="section-heading">Industries Served</h2>
-          <p className="section-subtitle mt-3">TODO: Highlight commercial, residential, and retail programs.</p>
-        </section>
-        <section>
-          <h2 className="section-heading">Compliance</h2>
-          <p className="section-subtitle mt-3">TODO: Mention EN standards, documentation, and customs support.</p>
-        </section>
-      </Container>
+      <PageHeader title={region.title} description={region.intro} />
+      <RegionPlaybook region={region} />
     </>
   );
 }

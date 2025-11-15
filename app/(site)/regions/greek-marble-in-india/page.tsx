@@ -1,20 +1,28 @@
-import { Container } from '@/components/Container';
+import type { Metadata } from 'next';
 import { PageHeader } from '@/components/PageHeader';
+import { RegionPlaybook } from '@/components/regions/RegionPlaybook';
+import { regionLandings } from '@/data/regions';
 
-export default function GreekMarbleInIndiaPage() {
+const region = regionLandings.find((entry) => entry.slug === 'greek-marble-in-india');
+
+export const metadata: Metadata = {
+  title: region ? region.title : 'Region',
+  description: region?.intro,
+  openGraph: {
+    title: region?.title || 'Region',
+    description: region?.intro || ''
+  }
+};
+
+export default function RegionPage() {
+  if (!region) {
+    return null;
+  }
+
   return (
     <>
-      <PageHeader title="Greek Marble in India" description="Thassos, Volakas, and more for Indian projects." />
-      <Container className="space-y-10 py-16">
-        <section>
-          <h2 className="section-heading">Availability</h2>
-          <p className="section-subtitle mt-3">TODO: Share typical lead times and block selection support.</p>
-        </section>
-        <section>
-          <h2 className="section-heading">Applications</h2>
-          <p className="section-subtitle mt-3">TODO: Suggest hospitality, retail, and villa use cases.</p>
-        </section>
-      </Container>
+      <PageHeader title={region.title} description={region.intro} />
+      <RegionPlaybook region={region} />
     </>
   );
 }
