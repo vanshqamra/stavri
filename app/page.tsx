@@ -139,10 +139,10 @@ export default function HomePage() {
     <main className="bg-white text-[#0a0a0a]">
       <section className="relative isolate overflow-hidden">
         <div
-          className="relative w-full h-[70vh] md:h-[85vh] bg-cover bg-center before:absolute before:inset-0 before:bg-black/35 before:content-['']"
+          className="relative w-full h-[70vh] md:h-[85vh] bg-cover bg-center before:absolute before:inset-0 before:bg-black/35 before:content-[''] after:absolute after:inset-x-0 after:bottom-0 after:h-32 after:bg-gradient-to-t after:from-black/60"
           style={{
             backgroundImage:
-              "url('https://images.unsplash.com/photo-1501045661006-fcebe0257c3f?auto=format&fit=crop&w=1900&q=80')"
+              "url('https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1900&q=80')"
           }}
         >
           <Container className="relative z-10 flex h-full items-center">
@@ -158,10 +158,10 @@ export default function HomePage() {
                 residences receive perfectly matched marble at installation.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Button href="/quote-builder" className="px-8 text-lg">
+                <Button href="/quote-builder" className="px-8 py-3 text-lg">
                   Start Quote Builder
                 </Button>
-                <Button href="/products" variant="secondary" className="px-8 text-lg bg-white/90">
+                <Button href="/products" variant="secondary" className="px-8 py-3 text-lg bg-white/95 text-black">
                   Browse Products
                 </Button>
               </div>
@@ -184,8 +184,8 @@ export default function HomePage() {
           </div>
           <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {audiences.map((audience, index) => (
-              <div key={audience.title} className={`${cardStyles} flex flex-col gap-4`}>
-                <div className="flex h-12 w-12 items-center justify-center rounded-full border border-slate-300 text-sm font-semibold">
+              <div key={audience.title} className={`${cardStyles} flex flex-col gap-4 bg-white/80`}> 
+                <div className="flex h-12 w-12 items-center justify-center rounded-full border border-slate-300 text-sm font-semibold text-[#0a0a0a]">
                   {String(index + 1).padStart(2, '0')}
                 </div>
                 <h3 className="text-xl font-semibold">{audience.title}</h3>
@@ -223,7 +223,9 @@ export default function HomePage() {
                   />
                 </figure>
                 <div className="flex flex-1 flex-col gap-4 border-t border-slate-200 p-6 md:p-8">
-                  <span className="text-xs uppercase tracking-[0.4em] text-slate-500">{marble.category}</span>
+                  <span className="inline-flex w-fit rounded-full border border-slate-200 px-3 py-1 text-xs uppercase tracking-[0.4em] text-slate-500">
+                    {marble.category}
+                  </span>
                   <div>
                     <h3 className="text-2xl font-semibold">{marble.name}</h3>
                     <p className="text-sm text-slate-500">{marble.origin}</p>
@@ -255,7 +257,7 @@ export default function HomePage() {
           </div>
           <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2">
             {valueProps.map((prop) => (
-              <div key={prop.title} className={`${cardStyles} space-y-4`}>
+              <div key={prop.title} className={`${cardStyles} space-y-4 border-t-4 border-[#c59d5f]`}> 
                 <span className="text-xs uppercase tracking-[0.4em] text-slate-500">Advantage</span>
                 <h3 className="text-2xl font-semibold">{prop.title}</h3>
                 <p className="text-base text-slate-600 leading-relaxed">{prop.description}</p>
@@ -273,20 +275,23 @@ export default function HomePage() {
               Transparent touchpoints keep every stakeholder aligned from the first sample to final installation.
             </p>
           </div>
-          <ol className="relative mt-16 space-y-12 md:grid md:grid-cols-4 md:gap-10 md:space-y-0">
+          <ol className="relative mt-16 space-y-12 md:space-y-0 md:grid md:grid-cols-4 md:gap-10">
             {processSteps.map((step, index) => (
-              <li
-                key={step.title}
-                className="relative pl-12 md:pl-0 md:after:absolute md:after:top-8 md:after:left-full md:after:h-px md:after:w-10 md:after:bg-slate-200 md:last:after:hidden"
-              >
-                <span className="absolute left-0 top-1 flex h-10 w-10 items-center justify-center rounded-full border border-slate-300 bg-white text-sm font-semibold md:static md:mb-6 md:h-14 md:w-14 md:text-base">
-                  {String(index + 1).padStart(2, '0')}
-                </span>
-                <span className="absolute left-5 top-12 h-[calc(100%-1.5rem)] w-px bg-slate-200 md:hidden" aria-hidden />
-                <div className={`${cardStyles} mt-4 md:mt-0`}>
+              <li key={step.title} className="relative md:flex md:flex-col md:items-start">
+                <div className="flex items-center gap-4">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-full border border-slate-300 bg-white text-sm font-semibold md:h-14 md:w-14 md:text-base">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <div className="h-px flex-1 bg-slate-200 md:hidden" aria-hidden />
+                </div>
+                <span className="absolute left-6 top-12 h-[calc(100%-3rem)] w-px bg-slate-200 md:hidden" aria-hidden />
+                <div className={`${cardStyles} mt-6 w-full md:mt-8`}>
                   <h3 className="text-xl font-semibold">{step.title}</h3>
                   <p className="mt-3 text-base text-slate-600 leading-relaxed">{step.description}</p>
                 </div>
+                {index !== processSteps.length - 1 && (
+                  <span className="hidden md:absolute md:right-[-20px] md:top-7 md:block md:h-px md:w-10 md:bg-slate-200" aria-hidden />
+                )}
               </li>
             ))}
           </ol>
@@ -294,8 +299,8 @@ export default function HomePage() {
       </section>
 
       <section className="border-b border-slate-100 py-20 md:py-32">
-        <Container className="grid gap-16 lg:grid-cols-2 lg:items-start">
-          <div className="space-y-6">
+        <Container className="grid gap-16 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+          <div className="space-y-6 lg:border-l lg:border-slate-200 lg:pl-10">
             <p className="text-xs uppercase tracking-[0.4em] text-slate-500">Global Presence</p>
             <h2 className={sectionTitle}>India Sourcing · Europe Distribution</h2>
             <div className="space-y-6 text-base md:text-lg text-slate-700 leading-relaxed">
@@ -313,11 +318,11 @@ export default function HomePage() {
               </p>
             </div>
           </div>
-          <div className={`${cardStyles} bg-slate-50`}> 
+          <div className={`${cardStyles} bg-slate-50`}>
             <h3 className="text-xl font-semibold">Key Corridors</h3>
-            <ul className="mt-8 space-y-4 text-base text-slate-700">
+            <ul className="mt-8 divide-y divide-slate-200 text-base text-slate-700">
               {corridors.map((corridor) => (
-                <li key={corridor} className="flex items-center gap-4">
+                <li key={corridor} className="flex items-center gap-4 py-4 first:pt-0 last:pb-0">
                   <span className="h-2.5 w-2.5 rounded-full bg-[#0a0a0a]" aria-hidden />
                   <span>{corridor}</span>
                 </li>
@@ -335,8 +340,8 @@ export default function HomePage() {
           </div>
           <div className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-3">
             {testimonials.map((testimonial) => (
-              <div key={testimonial.name} className={`${cardStyles} space-y-6`}>
-                <span className="text-4xl text-slate-200" aria-hidden>
+              <div key={testimonial.name} className={`${cardStyles} space-y-6`}> 
+                <span className="text-5xl text-slate-200" aria-hidden>
                   “
                 </span>
                 <p className="text-lg text-slate-800 leading-relaxed">{testimonial.quote}</p>
