@@ -23,17 +23,39 @@ const defaultData: ContactFormData = {
 export const ContactForm = () => {
   const [formData, setFormData] = useState<ContactFormData>(defaultData);
   const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState<Partial<Record<keyof ContactFormData, string>>>({});
 
   const handleChange = (field: keyof ContactFormData) =>
     (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       setFormData((prev) => ({ ...prev, [field]: event.target.value }));
+      setErrors((prev) => ({ ...prev, [field]: undefined }));
     };
+
+  const validate = () => {
+    const newErrors: Partial<Record<keyof ContactFormData, string>> = {};
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required.';
+    }
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required.';
+    }
+    if (!formData.message.trim()) {
+      newErrors.message = 'Please share a short brief.';
+    }
+    return newErrors;
+  };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length) {
+      setErrors(validationErrors);
+      return;
+    }
     console.log('Contact form submission', formData);
     setSubmitted(true);
     setFormData(defaultData);
+    setErrors({});
   };
 
   return (
@@ -45,8 +67,9 @@ export const ContactForm = () => {
             value={formData.name}
             onChange={handleChange('name')}
             required
-            className="mt-1 w-full rounded-2xl border border-slate-200 bg-white px-4 py-2"
+            className={`mt-1 w-full rounded-2xl border bg-white px-4 py-2 ${errors.name ? 'border-red-400' : 'border-slate-200'}`}
           />
+          {errors.name ? <p className="mt-1 text-xs text-red-500">{errors.name}</p> : null}
         </label>
         <label className="text-sm font-medium text-slate-700">
           Email
@@ -55,8 +78,9 @@ export const ContactForm = () => {
             value={formData.email}
             onChange={handleChange('email')}
             required
-            className="mt-1 w-full rounded-2xl border border-slate-200 bg-white px-4 py-2"
+            className={`mt-1 w-full rounded-2xl border bg-white px-4 py-2 ${errors.email ? 'border-red-400' : 'border-slate-200'}`}
           />
+          {errors.email ? <p className="mt-1 text-xs text-red-500">{errors.email}</p> : null}
         </label>
       </div>
       <div className="grid gap-4 md:grid-cols-2">
@@ -93,8 +117,10 @@ export const ContactForm = () => {
           value={formData.message}
           onChange={handleChange('message')}
           rows={4}
-          className="mt-1 w-full rounded-2xl border border-slate-200 bg-white px-4 py-2"
+          className={`mt-1 w-full rounded-2xl border bg-white px-4 py-2 ${errors.message ? 'border-red-400' : 'border-slate-200'}`}
+          required
         />
+        {errors.message ? <p className="mt-1 text-xs text-red-500">{errors.message}</p> : null}
       </label>
       <button
         type="submit"

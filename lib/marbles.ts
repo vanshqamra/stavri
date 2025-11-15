@@ -648,3 +648,22 @@ export const marbleList = products.map((product) => ({
   label: `${product.name} (${product.origin})`,
   category: product.category
 }));
+
+export const getMarbleBySlug = (slug: string) => products.find((product) => product.slug === slug);
+
+export const getRelatedMarbles = (slug: string, limit = 3) => {
+  const current = getMarbleBySlug(slug);
+  if (!current) {
+    return [];
+  }
+
+  const candidates = products.filter((product) => product.slug !== slug && product.category === current.category);
+  const related = candidates.slice(0, limit);
+
+  if (related.length < limit) {
+    const filler = products.filter((product) => product.slug !== slug && product.category !== current.category);
+    related.push(...filler.slice(0, limit - related.length));
+  }
+
+  return related;
+};

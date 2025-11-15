@@ -1,9 +1,11 @@
 'use client';
 
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useMemo, useState } from 'react';
+import { marbleList } from '@/lib/marbles';
 
 interface LineItem {
-  marble: string;
+  id: string;
+  marbleSlug: string;
   quantity: string;
   thickness: string;
   destination: string;
@@ -18,7 +20,12 @@ interface QuoteFormState {
   notes: string;
 }
 
-const createEmptyItem = (): LineItem => ({ marble: '', quantity: '', thickness: '', destination: '' });
+const generateId = () =>
+  typeof crypto !== 'undefined' && 'randomUUID' in crypto
+    ? crypto.randomUUID()
+    : Math.random().toString(36).slice(2);
+
+const createEmptyItem = (): LineItem => ({ id: generateId(), marbleSlug: '', quantity: '', thickness: '', destination: '' });
 
 const defaultState: QuoteFormState = {
   name: '',
@@ -40,23 +47,32 @@ export const QuoteBuilderForm = () => {
     };
 
   const updateItem = (field: keyof LineItem) =>
-    (event: ChangeEvent<HTMLInputElement>) => {
+    (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
       setCurrentItem((prev) => ({ ...prev, [field]: event.target.value }));
     };
 
   const addItem = () => {
-    if (!currentItem.marble || !currentItem.quantity) {
+    if (!currentItem.marbleSlug || !currentItem.quantity) {
       return;
     }
     setFormState((prev) => ({ ...prev, lineItems: [...prev.lineItems, currentItem] }));
     setCurrentItem(createEmptyItem());
   };
 
+  const removeItem = (id: string) => {
+    setFormState((prev) => ({ ...prev, lineItems: prev.lineItems.filter((item) => item.id !== id) }));
+  };
+
+  const totalQuantity = useMemo(() => {
+    return formState.lineItems.reduce((sum, item) => sum + (parseFloat(item.quantity) || 0), 0);
+  }, [formState.lineItems]);
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('Quote builder submission', formState);
+    console.log('Quote builder submission', JSON.stringify(formState, null, 2));
     setSubmitted(true);
     setFormState(defaultState);
+    setCurrentItem(createEmptyItem());
   };
 
   return (
@@ -96,12 +112,18 @@ export const QuoteBuilderForm = () => {
       <section>
         <h3 className="text-lg font-semibold text-slate-900">Step 2 · Line Items</h3>
         <div className="mt-4 grid gap-4 md:grid-cols-2">
-          <input
-            placeholder="Marble name"
-            value={currentItem.marble}
-            onChange={updateItem('marble')}
+          <select
+            value={currentItem.marbleSlug}
+            onChange={updateItem('marbleSlug')}
             className="rounded-2xl border border-slate-200 bg-white px-4 py-2"
-          />
+          >
+            <option value="">Select marble</option>
+            {marbleList.map((marble) => (
+              <option key={marble.value} value={marble.value}>
+                {marble.label}
+              </option>
+            ))}
+          </select>
           <input
             placeholder="Quantity (sqm / crates)"
             value={currentItem.quantity}
@@ -132,9 +154,18 @@ export const QuoteBuilderForm = () => {
           {formState.lineItems.length === 0 ? <p className="text-sm text-slate-500">No items yet.</p> : null}
           {formState.lineItems.map((item, index) => (
             <div key={`${item.marble}-${index}`} className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm">
-              <p className="font-semibold text-slate-900">{item.marble}</p>
+              <p className="font-semibold text-slate-900">
+                {marbleList.find((marble) => marble.value === item.marbleSlug)?.label || 'Custom marble'}
+              </p>
               <p>Qty: {item.quantity}</p>
               <p>Thickness: {item.thickness || 'TBD'} · Destination: {item.destination || 'TBD'}</p>
+              <button
+                type="button"
+                onClick={() => removeItem(item.id)}
+                className="mt-2 text-xs font-semibold text-rose-500"
+              >
+                Remove item
+              </button>
             </div>
           ))}
         </div>
@@ -152,12 +183,14 @@ export const QuoteBuilderForm = () => {
       <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6 text-sm text-slate-600">
         <h4 className="text-base font-semibold text-slate-900">Summary</h4>
         <p className="mt-2">Line items added: {formState.lineItems.length}</p>
-        <p>We will reply with quarry availability, pricing, and logistics options.</p>
+        <p>Total requested quantity: {totalQuantity.toFixed(2)} (calculated from numeric values)</p>
+        <p className="mt-2">We will reply with quarry availability, pricing, and logistics options.</p>
       </div>
       <button type="submit" className="w-full rounded-full bg-emerald-600 py-3 text-sm font-semibold text-white">
         Submit Quote Request
       </button>
       {submitted ? <p className="text-sm text-emerald-600">Quote request logged. Expect a reply shortly.</p> : null}
+      {/* TODO: Replace console.log with secure API endpoint in Phase 3. */}
     </form>
   );
 };

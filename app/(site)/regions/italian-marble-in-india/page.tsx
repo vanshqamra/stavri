@@ -1,20 +1,28 @@
-import { Container } from '@/components/Container';
+import type { Metadata } from 'next';
 import { PageHeader } from '@/components/PageHeader';
+import { RegionPlaybook } from '@/components/regions/RegionPlaybook';
+import { regionLandings } from '@/data/regions';
 
-export default function ItalianMarbleInIndiaPage() {
+const region = regionLandings.find((entry) => entry.slug === 'italian-marble-in-india');
+
+export const metadata: Metadata = {
+  title: region ? region.title : 'Region',
+  description: region?.intro,
+  openGraph: {
+    title: region?.title || 'Region',
+    description: region?.intro || ''
+  }
+};
+
+export default function RegionPage() {
+  if (!region) {
+    return null;
+  }
+
   return (
     <>
-      <PageHeader title="Italian Marble in India" description="Landing page for importers seeking European stones." />
-      <Container className="space-y-10 py-16">
-        <section>
-          <h2 className="section-heading">Popular Stones</h2>
-          <p className="section-subtitle mt-3">TODO: Highlight Statuario, Calacatta, Botticino supply lines.</p>
-        </section>
-        <section>
-          <h2 className="section-heading">Distribution Support</h2>
-          <p className="section-subtitle mt-3">TODO: Mention bonded warehouses and credit terms.</p>
-        </section>
-      </Container>
+      <PageHeader title={region.title} description={region.intro} />
+      <RegionPlaybook region={region} />
     </>
   );
 }
