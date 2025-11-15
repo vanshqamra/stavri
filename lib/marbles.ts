@@ -635,6 +635,9 @@ export const products: Product[] = [
   }
 ];
 
+// ✅ NEW: alias used by your [slug] page
+export const marbles = products;
+
 export const productCategories: { key: ProductCategory; title: string; description: string }[] = [
   { key: 'white', title: 'White Marble', description: 'Iconic whites for timeless luxury.' },
   { key: 'beige', title: 'Beige Marble', description: 'Warm neutrals suited for hospitality.' },
@@ -657,11 +660,15 @@ export const getRelatedMarbles = (slug: string, limit = 3) => {
     return [];
   }
 
-  const candidates = products.filter((product) => product.slug !== slug && product.category === current.category);
+  const candidates = products.filter(
+    (product) => product.slug !== slug && product.category === current.category
+  );
   const related = candidates.slice(0, limit);
 
   if (related.length < limit) {
-    const filler = products.filter((product) => product.slug !== slug && product.category !== current.category);
+    const filler = products.filter(
+      (product) => product.slug !== slug && product.category !== current.category
+    );
     related.push(...filler.slice(0, limit - related.length));
   }
 
