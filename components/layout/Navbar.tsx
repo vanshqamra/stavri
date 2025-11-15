@@ -31,8 +31,8 @@ export const Navbar = () => {
             <Link
               key={link.href}
               href={link.href}
-              className={`transition hover:text-emerald-600 ${
-                router.pathname === link.href ? 'text-emerald-600' : ''
+              className={`transition hover:text-amber-600 ${
+                router.pathname === link.href ? 'text-amber-600' : ''
               }`}
             >
               {link.label}
@@ -40,7 +40,7 @@ export const Navbar = () => {
           ))}
           <Link
             href="/quote-builder"
-            className="rounded-full bg-emerald-600 px-4 py-2 text-white shadow-lg shadow-emerald-600/30"
+            className="rounded-full bg-amber-600 px-4 py-2 text-white shadow-lg shadow-amber-600/30"
           >
             Request a Quote
           </Link>
@@ -69,7 +69,7 @@ export const Navbar = () => {
             <Link
               href="/quote-builder"
               onClick={() => setOpen(false)}
-              className="block rounded-full bg-emerald-600 px-4 py-2 text-center text-white"
+              className="block rounded-full bg-amber-600 px-4 py-2 text-center text-white"
             >
               Request a Quote
             </Link>

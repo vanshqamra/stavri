@@ -87,7 +87,7 @@ export const QuoteRequestForm = ({ marble }: { marble: string }) => {
           onChange={(e) => setForm({ ...form, deadline: e.target.value })}
         />
       </div>
-      <button type="submit" className="w-full rounded-full bg-emerald-600 py-3 text-white font-semibold" disabled={status === 'submitting'}>
+      <button type="submit" className="w-full rounded-full bg-amber-600 py-3 text-white font-semibold" disabled={status === 'submitting'}>
         {status === 'success' ? 'Request submitted' : status === 'submitting' ? 'Sending…' : 'Request a Quote'}
       </button>
     </form>

@@ -26,7 +26,7 @@ export const RegionPlaybook = ({ region }: RegionPlaybookProps) => {
           <ul className="mt-4 space-y-2 text-sm text-slate-600">
             {region.popularMarbles.map((stone) => (
               <li key={stone} className="flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-emerald-500" aria-hidden="true" />
+                <span className="h-2 w-2 rounded-full bg-amber-500" aria-hidden="true" />
                 {stone}
               </li>
             ))}
@@ -37,7 +37,7 @@ export const RegionPlaybook = ({ region }: RegionPlaybookProps) => {
           <ul className="mt-4 space-y-2 text-sm text-slate-600">
             {region.advantages.map((advantage) => (
               <li key={advantage} className="flex items-start gap-2">
-                <svg className="mt-1 h-4 w-4 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg className="mt-1 h-4 w-4 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="m5 13 4 4L19 7" />
                 </svg>
                 <span>{advantage}</span>
@@ -46,9 +46,9 @@ export const RegionPlaybook = ({ region }: RegionPlaybookProps) => {
           </ul>
         </div>
       </section>
-      <section className="rounded-3xl border border-dashed border-emerald-200 bg-emerald-50 p-6 text-center">
-        <h3 className="text-lg font-semibold text-emerald-900">{region.cta}</h3>
-        <p className="mt-3 text-sm text-emerald-800">
+      <section className="rounded-3xl border border-dashed border-amber-200 bg-amber-50 p-6 text-center">
+        <h3 className="text-lg font-semibold text-amber-900">{region.cta}</h3>
+        <p className="mt-3 text-sm text-amber-800">
           Share current demand, port preferences, and timeline so we can reserve quarry lots and freight space.
         </p>
         <Button href="/contact" className="mt-4">

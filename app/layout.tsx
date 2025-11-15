@@ -4,9 +4,15 @@ import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://marblesnearme.com'),
   title: 'Marbles Near Me | Rab Noor Pvt Ltd — Premium Indian & European Marble',
   description:
     'Rab Noor Pvt Ltd operates marblesnearme.com to connect Indian marble quarries with European distribution hubs for global projects.',
+  openGraph: {
+    title: 'Marbles Near Me | Rab Noor Pvt Ltd',
+    description: 'Premium marble sourcing with synchronized logistics between India and Europe.',
+    url: 'https://marblesnearme.com'
+  },
   icons: {
     icon: '/favicon.ico'
   }

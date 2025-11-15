@@ -96,9 +96,12 @@ export const QuoteBuilderForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
-      <section>
-        <h3 className="text-lg font-semibold text-slate-900">Step 1 · Contact Info</h3>
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <section className="rounded-3xl border border-slate-200/80 bg-white/80 p-6">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h3 className="text-lg font-semibold text-slate-900">Step 1 · Contact Info</h3>
+          <span className="text-xs uppercase tracking-[0.3em] text-slate-500">Required</span>
+        </div>
         <div className="mt-4 grid gap-4 md:grid-cols-2">
           <input
             placeholder="Full Name"
@@ -129,7 +132,7 @@ export const QuoteBuilderForm = () => {
           />
         </div>
       </section>
-      <section>
+      <section className="rounded-3xl border border-slate-200/80 bg-white/80 p-6">
         <h3 className="text-lg font-semibold text-slate-900">Step 2 · Line Items</h3>
         <div className="mt-4 grid gap-4 md:grid-cols-2">
           <select
@@ -166,31 +169,32 @@ export const QuoteBuilderForm = () => {
         <button
           type="button"
           onClick={addItem}
-          className="mt-4 rounded-full border border-dashed border-emerald-400 px-4 py-2 text-sm font-semibold text-emerald-600"
+          className="mt-4 inline-flex items-center gap-2 rounded-full border border-dashed border-amber-400 px-4 py-2 text-sm font-semibold text-amber-700"
         >
           Add Line Item
         </button>
         <div className="mt-6 space-y-3">
           {formState.lineItems.length === 0 ? <p className="text-sm text-slate-500">No items yet.</p> : null}
           {formState.lineItems.map((item) => (
-            <div key={item.id} className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm">
-              <p className="font-semibold text-slate-900">
-                {marbleList.find((marble) => marble.value === item.marbleSlug)?.label || 'Custom marble'}
-              </p>
-              <p>Qty: {item.quantity}</p>
-              <p>Thickness: {item.thickness || 'TBD'} · Destination: {item.destination || 'TBD'}</p>
-              <button
-                type="button"
-                onClick={() => removeItem(item.id)}
-                className="mt-2 text-xs font-semibold text-rose-500"
-              >
+            <div
+              key={item.id}
+              className="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-slate-50/70 p-4 text-sm sm:flex-row sm:items-center sm:justify-between"
+            >
+              <div>
+                <p className="font-semibold text-slate-900">
+                  {marbleList.find((marble) => marble.value === item.marbleSlug)?.label || 'Custom marble'}
+                </p>
+                <p className="text-slate-600">Qty: {item.quantity}</p>
+                <p className="text-slate-500">Thickness: {item.thickness || 'TBD'} · Destination: {item.destination || 'TBD'}</p>
+              </div>
+              <button type="button" onClick={() => removeItem(item.id)} className="text-xs font-semibold text-rose-500">
                 Remove item
               </button>
             </div>
           ))}
         </div>
       </section>
-      <section>
+      <section className="rounded-3xl border border-slate-200/80 bg-white/80 p-6">
         <h3 className="text-lg font-semibold text-slate-900">Step 3 · Notes</h3>
         <textarea
           rows={4}
@@ -208,13 +212,13 @@ export const QuoteBuilderForm = () => {
       </div>
       <button
         type="submit"
-        className="w-full rounded-full bg-emerald-600 py-3 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-60"
+        className="w-full rounded-full bg-amber-600 py-3 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-60"
         disabled={status === 'submitting'}
       >
         {status === 'submitting' ? 'Submitting…' : 'Submit Quote Request'}
       </button>
       {feedback ? (
-        <p className={`text-sm ${status === 'error' ? 'text-rose-500' : 'text-emerald-600'}`} aria-live="polite">
+        <p className={`text-sm ${status === 'error' ? 'text-rose-500' : 'text-amber-600'}`} aria-live="polite">
           {feedback}
         </p>
       ) : null}

@@ -116,13 +116,13 @@ export const ProductInquiryForm = ({ productName }: ProductInquiryFormProps) => 
       </label>
       <button
         type="submit"
-        className="w-full rounded-full bg-emerald-600 py-3 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-60"
+        className="w-full rounded-full bg-amber-600 py-3 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-60"
         disabled={status === 'submitting'}
       >
         {status === 'submitting' ? 'Submitting…' : 'Request Availability'}
       </button>
       {feedback ? (
-        <p className={`text-sm ${status === 'error' ? 'text-rose-500' : 'text-emerald-700'}`} aria-live="polite">
+        <p className={`text-sm ${status === 'error' ? 'text-rose-500' : 'text-amber-700'}`} aria-live="polite">
           {feedback}
         </p>
       ) : null}

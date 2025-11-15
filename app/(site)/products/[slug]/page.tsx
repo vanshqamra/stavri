@@ -4,6 +4,7 @@ import { Container } from '@/components/Container';
 import { Button } from '@/components/Button';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { ProductInquiryForm } from '@/components/forms/site/ProductInquiryForm';
+import { ProductCard } from '@/components/cards/ProductCard';
 import { getMarbleBySlug, getRelatedMarbles, marbles } from '@/lib/marbles';
 
 interface ProductPageProps {
@@ -52,13 +53,14 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
         <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Products', href: '/products' }, { label: product.name }]} />
         <header className="grid gap-8 lg:grid-cols-[3fr_2fr]">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-emerald-500">{product.category} marble</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-600">{product.category} marble</p>
             <h1 className="mt-3 text-4xl font-semibold text-slate-900">{product.name}</h1>
             <p className="mt-2 text-base text-slate-500">Origin: {product.origin}</p>
             <p className="mt-4 text-lg text-slate-700">{product.heroTagline}</p>
-            <div className="mt-6 flex flex-wrap gap-3 text-sm text-slate-600">
-              <span className="rounded-full bg-slate-100 px-4 py-1">Base Color: {product.baseColor}</span>
-              <span className="rounded-full bg-slate-100 px-4 py-1">Vein Style: {product.veinStyle}</span>
+            <div className="mt-6 flex flex-wrap gap-3 text-xs font-semibold text-slate-600">
+              <span className="rounded-full border border-slate-200 px-4 py-1 uppercase tracking-[0.2em]">{product.baseColor}</span>
+              <span className="rounded-full border border-slate-200 px-4 py-1 uppercase tracking-[0.2em]">{product.veinStyle}</span>
+              <span className="rounded-full border border-slate-200 px-4 py-1">{product.availability}</span>
             </div>
             <div className="mt-8 flex flex-wrap gap-4">
               <Button href="/quote-builder">Build a Multistone Quote</Button>
@@ -72,14 +74,14 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
             <ul className="mt-4 space-y-2">
               {product.applications.slice(0, 4).map((application) => (
                 <li key={application} className="flex items-start gap-2">
-                  <svg className="mt-1 h-4 w-4 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg className="mt-1 h-4 w-4 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="m5 13 4 4L19 7" />
                   </svg>
                   <span>{application}</span>
                 </li>
               ))}
             </ul>
-            <p className="mt-4 text-xs uppercase tracking-[0.25em] text-emerald-500">Logistics</p>
+            <p className="mt-4 text-xs uppercase tracking-[0.25em] text-amber-500">Logistics</p>
             <p className="mt-2">{product.availability}</p>
           </div>
         </header>
@@ -98,10 +100,10 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
           <div className="rounded-3xl border border-slate-200 bg-white p-6">
             <h2 className="text-xl font-semibold text-slate-900">Technical Specifications</h2>
             <p className="mt-2 text-sm text-slate-600">Laboratory data and finish options validated by our QC engineers.</p>
-            <table className="mt-6 w-full text-sm text-slate-700">
+            <table className="mt-6 w-full divide-y divide-slate-100 text-sm text-slate-700">
               <tbody>
-                {product.technicalData.map((spec) => (
-                  <tr key={spec.label} className="border-b border-slate-100 last:border-none">
+                {product.technicalData.map((spec, index) => (
+                  <tr key={spec.label} className={index % 2 === 0 ? 'bg-slate-50/60' : 'bg-white'}>
                     <th scope="row" className="py-3 pr-4 text-left font-semibold text-slate-900">
                       {spec.label}
                     </th>
@@ -148,9 +150,9 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
               <ProductInquiryForm productName={product.name} />
             </div>
           </div>
-          <div className="rounded-3xl border border-emerald-100 bg-emerald-50 p-6">
-            <h3 className="text-lg font-semibold text-emerald-900">What happens next?</h3>
-            <ol className="mt-4 space-y-4 text-sm text-emerald-900">
+          <div className="rounded-3xl border border-amber-100 bg-amber-50 p-6">
+            <h3 className="text-lg font-semibold text-amber-900">What happens next?</h3>
+            <ol className="mt-4 space-y-4 text-sm text-amber-900">
               <li>
                 <strong>1. Availability Check:</strong> We confirm quarry lots and current slab inventory.
               </li>
@@ -161,7 +163,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                 <strong>3. Logistics Plan:</strong> Freight desk books FOB India or CIF Europe depending on your location.
               </li>
             </ol>
-            <p className="mt-6 text-sm text-emerald-800">Need urgent delivery? Call our Athens warehouse for reserve stock.</p>
+            <p className="mt-6 text-sm text-amber-800">Need urgent delivery? Call our Athens warehouse for reserve stock.</p>
             <Button href="/contact" variant="secondary" className="mt-6">
               Talk to Sales
             </Button>
@@ -180,20 +182,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
             </div>
             <div className="mt-6 grid gap-6 md:grid-cols-3">
               {relatedMarbles.map((stone) => (
-                <article key={stone.slug} className="rounded-3xl border border-slate-200 bg-white shadow-sm">
-                  <figure className="overflow-hidden rounded-t-3xl">
-                    <img src={stone.imageGallery[0].url} alt={`${stone.name} slab`} className="h-48 w-full object-cover" />
-                  </figure>
-                  <div className="p-5">
-                    <p className="text-xs uppercase tracking-[0.3em] text-emerald-500">{stone.category}</p>
-                    <h3 className="mt-2 text-lg font-semibold text-slate-900">{stone.name}</h3>
-                    <p className="mt-1 text-sm text-slate-500">{stone.origin}</p>
-                    <p className="mt-3 text-sm text-slate-600">{stone.heroTagline}</p>
-                    <Button href={`/products/${stone.slug}`} variant="ghost" className="mt-4 px-0">
-                      View Details →
-                    </Button>
-                  </div>
-                </article>
+                <ProductCard key={stone.slug} product={stone} />
               ))}
             </div>
           </section>

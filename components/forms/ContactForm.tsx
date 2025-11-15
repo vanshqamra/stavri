@@ -82,7 +82,7 @@ export const ContactForm = () => {
       />
       <button
         type="submit"
-        className="w-full rounded-full bg-emerald-600 py-3 text-white font-semibold"
+        className="w-full rounded-full bg-amber-600 py-3 text-white font-semibold"
         disabled={status === 'submitting'}
       >
         {status === 'success' ? 'Thank you! We will reply soon.' : status === 'submitting' ? 'Sending…' : 'Send Message'}

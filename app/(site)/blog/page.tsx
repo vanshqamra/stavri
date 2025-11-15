@@ -29,7 +29,7 @@ export default function BlogPage() {
                 <img src={post.heroImage} alt={post.heroAlt} className="h-full w-full object-cover" />
               </figure>
               <div className="flex flex-1 flex-col p-6">
-                <p className="text-xs uppercase tracking-[0.3em] text-emerald-500">{formatDate(post.date)} · {post.readingTime}</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-amber-500">{formatDate(post.date)} · {post.readingTime}</p>
                 <h2 className="mt-2 text-2xl font-semibold text-slate-900">{post.title}</h2>
                 <p className="mt-3 flex-1 text-base text-slate-600">{post.excerpt}</p>
                 <div className="mt-4 flex flex-wrap gap-2 text-xs text-slate-500">
@@ -39,7 +39,7 @@ export default function BlogPage() {
                     </span>
                   ))}
                 </div>
-                <Link href={`/blog/${post.slug}`} className="mt-5 inline-flex items-center text-sm font-semibold text-emerald-600">
+                <Link href={`/blog/${post.slug}`} className="mt-5 inline-flex items-center text-sm font-semibold text-amber-600">
                   Read article →
                 </Link>
               </div>

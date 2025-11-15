@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Container } from '@/components/Container';
 import { Button } from '@/components/Button';
+import { ProductCard } from '@/components/cards/ProductCard';
 import { products } from '@/lib/marbles';
 
 export const metadata: Metadata = {
@@ -131,15 +132,15 @@ export default function HomePage() {
   return (
     <>
       <section className="bg-[radial-gradient(circle_at_top,_#fdfcfb,_#e2e8f0)] py-20 sm:py-28">
-        <Container className="grid gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] items-center">
+        <Container className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
           <div>
-            <p className="text-sm uppercase tracking-[0.3em] text-emerald-600">Rab Noor Pvt Ltd</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.4em] text-amber-600">Rab Noor Pvt Ltd</p>
             <h1 className="mt-5 text-4xl font-semibold text-slate-900 sm:text-5xl">
-              Premium Indian & European Marble — Near You, Delivered Worldwide
+              Marble sourcing, QC, and logistics executed like clockwork.
             </h1>
             <p className="mt-5 text-lg text-slate-600">
-              marblesnearme.com synchronizes quarry approvals, fabrication slots, and international shipping so your project
-              has the right stone on site, on schedule.
+              We align quarry selections, fabrication slots, and customs-ready shipping so your villas, hotels, and civic spaces
+              receive perfectly matched marble when installations begin.
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <Button href="/quote-builder" className="text-base">
@@ -150,12 +151,12 @@ export default function HomePage() {
               </Button>
             </div>
             <p className="mt-6 text-sm text-slate-500">
-              Based in India & Greece · Serving architects, developers, and distributors.
+              Dual teams in India and Greece · Serving architects, developers, distributors, and luxury homeowners.
             </p>
           </div>
-          <div className="rounded-[32px] border border-white/60 bg-white/90 p-8 shadow-xl shadow-slate-200/70 backdrop-blur">
+          <div className="rounded-[32px] border border-white/60 bg-white/90 p-8 shadow-2xl shadow-slate-200/70 backdrop-blur">
             <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
-              <span>Featured Dispatch</span>
+              <span>Current Dispatch</span>
               <span>Week 12</span>
             </div>
             <div className="mt-6 space-y-4 text-slate-700">
@@ -180,8 +181,12 @@ export default function HomePage() {
                 </div>
                 <div>
                   <p className="text-sm text-slate-500">Status</p>
-                  <p className="text-base font-medium text-emerald-600">QC Passed · Loading 18 Mar</p>
+                  <p className="text-base font-medium text-amber-600">QC passed · Loading 18 Mar</p>
                 </div>
+              </div>
+              <div className="rounded-2xl bg-slate-50/70 p-4 text-sm text-slate-600">
+                <p className="font-semibold text-slate-900">Shipment checklist</p>
+                <p>Shade reports • ISPM 15 crates • EU customs file queued</p>
               </div>
             </div>
           </div>
@@ -193,17 +198,20 @@ export default function HomePage() {
           <div className="max-w-2xl">
             <h2 className="text-3xl font-semibold text-slate-900">Who We Serve</h2>
             <p className="mt-4 text-lg text-slate-600">
-              Dedicated account teams collaborate with each stakeholder group to translate drawings into precise marble
-              packages and delivery schedules.
+              Each partner group receives a dedicated desk to translate drawings into slab bundles, inspection checkpoints, and
+              synchronized delivery plans.
             </p>
           </div>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {audiences.map((audience) => (
+            {audiences.map((audience, index) => (
               <div
                 key={audience.title}
-                className="rounded-2xl border border-slate-200 bg-slate-50/70 p-6 transition hover:-translate-y-1 hover:border-emerald-500"
+                className="rounded-3xl border border-slate-200/80 bg-white/80 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
               >
-                <h3 className="text-lg font-semibold text-slate-900">{audience.title}</h3>
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-amber-100 text-sm font-semibold text-amber-700" aria-hidden>
+                  {index + 1}
+                </div>
+                <h3 className="mt-4 text-lg font-semibold text-slate-900">{audience.title}</h3>
                 <p className="mt-3 text-sm text-slate-600">{audience.description}</p>
               </div>
             ))}
@@ -228,20 +236,7 @@ export default function HomePage() {
           <div className="mt-10 overflow-x-auto">
             <div className="grid min-w-[640px] grid-cols-1 gap-6 sm:grid-cols-2 lg:min-w-full lg:grid-cols-3 xl:grid-cols-4">
               {featuredMarbles.map((marble) => (
-                <div key={marble.slug} className="flex h-full flex-col rounded-2xl border border-white bg-white p-6 shadow-sm">
-                  <div className="flex items-center justify-between text-sm text-slate-500">
-                    <span className="font-medium capitalize">{marble.category} marble</span>
-                    <span>{marble.origin}</span>
-                  </div>
-                  <h3 className="mt-4 text-xl font-semibold text-slate-900">{marble.name}</h3>
-                  <p className="mt-3 flex-1 text-sm text-slate-600">{marble.description}</p>
-                  <a
-                    href={`/products/${marble.slug}`}
-                    className="mt-5 text-sm font-semibold text-emerald-600 hover:text-emerald-700"
-                  >
-                    View details →
-                  </a>
-                </div>
+                <ProductCard key={marble.slug} product={marble} />
               ))}
             </div>
           </div>
@@ -259,8 +254,12 @@ export default function HomePage() {
           </div>
           <div className="mt-10 grid gap-6 sm:grid-cols-2">
             {valueProps.map((prop) => (
-              <div key={prop.title} className="rounded-2xl border border-slate-200 p-6 shadow-sm">
-                <h3 className="text-lg font-semibold text-slate-900">{prop.title}</h3>
+              <div
+                key={prop.title}
+                className="rounded-3xl border border-slate-200/80 bg-white/80 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+              >
+                <span className="text-sm font-semibold uppercase tracking-[0.3em] text-amber-600">Advantage</span>
+                <h3 className="mt-3 text-xl font-semibold text-slate-900">{prop.title}</h3>
                 <p className="mt-3 text-sm text-slate-600">{prop.description}</p>
               </div>
             ))}
@@ -276,13 +275,16 @@ export default function HomePage() {
               Transparent touchpoints keep every stakeholder aligned from the first sample to final installation.
             </p>
           </div>
-          <div className="mt-10 grid gap-8 md:grid-cols-4">
+          <div className="mt-10 grid gap-6 md:grid-cols-4">
             {processSteps.map((step, index) => (
-              <div key={step.title} className="relative flex flex-col">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-600 text-lg font-semibold text-white">
+              <div
+                key={step.title}
+                className="rounded-3xl border border-slate-200/80 bg-white/80 p-6 shadow-sm"
+              >
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-amber-600 text-lg font-semibold text-white">
                   {index + 1}
                 </div>
-                <h3 className="mt-4 text-xl font-semibold text-slate-900">{step.title}</h3>
+                <h3 className="mt-4 text-lg font-semibold text-slate-900">{step.title}</h3>
                 <p className="mt-3 text-sm text-slate-600">{step.description}</p>
               </div>
             ))}
@@ -293,7 +295,7 @@ export default function HomePage() {
       <section className="border-t border-slate-100 bg-white py-16 sm:py-20">
         <Container className="grid gap-12 lg:grid-cols-2 lg:items-center">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-emerald-600">Global Presence</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-amber-600">Global Presence</p>
             <h2 className="mt-4 text-3xl font-semibold text-slate-900">India Sourcing · Europe Distribution</h2>
             <div className="mt-6 space-y-4 text-slate-600">
               <p>
@@ -315,7 +317,7 @@ export default function HomePage() {
             <ul className="mt-6 space-y-3 text-sm text-slate-700">
               {corridors.map((corridor) => (
                 <li key={corridor} className="flex items-center gap-3">
-                  <span className="h-2 w-2 rounded-full bg-emerald-500" aria-hidden />
+                  <span className="h-2 w-2 rounded-full bg-amber-500" aria-hidden />
                   <span>{corridor}</span>
                 </li>
               ))}
@@ -328,14 +330,14 @@ export default function HomePage() {
         <Container>
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.3em] text-emerald-300">Partners Speak</p>
+              <p className="text-sm font-semibold uppercase tracking-[0.3em] text-amber-300">Partners Speak</p>
               <h2 className="mt-4 text-3xl font-semibold">Testimonials</h2>
             </div>
           </div>
           <div className="mt-10 grid gap-6 lg:grid-cols-3">
             {testimonials.map((testimonial) => (
               <div key={testimonial.name} className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
-                <p className="text-lg font-medium text-emerald-200">“{testimonial.quote}”</p>
+                <p className="text-lg font-medium text-amber-200">“{testimonial.quote}”</p>
                 <div className="mt-6 text-sm text-slate-200">
                   <p className="font-semibold text-white">{testimonial.name}</p>
                   <p>{testimonial.title}</p>
@@ -351,7 +353,7 @@ export default function HomePage() {
         <Container className="rounded-[32px] bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-10 text-white">
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:items-center">
             <div>
-              <p className="text-sm uppercase tracking-[0.3em] text-emerald-300">Final CTA</p>
+              <p className="text-sm uppercase tracking-[0.3em] text-amber-300">Final CTA</p>
               <h2 className="mt-4 text-3xl font-semibold">Ready to plan your marble package?</h2>
               <p className="mt-4 text-lg text-slate-200">
                 Share your drawings and quantities — we’ll propose stones, bundles, and shipping plans aligned with your

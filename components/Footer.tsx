@@ -13,8 +13,8 @@ export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="mt-16 border-t border-slate-200 bg-white">
-      <Container className="grid gap-10 py-12 md:grid-cols-3">
+    <footer className="mt-16 border-t border-slate-200 bg-gradient-to-b from-white to-slate-50/80">
+      <Container className="grid gap-12 py-12 md:grid-cols-3">
         <div>
           <h3 className="text-xl font-semibold text-slate-900">Rab Noor Marble</h3>
           <p className="mt-3 text-sm text-slate-600">
@@ -27,7 +27,7 @@ export const Footer = () => {
           <ul className="mt-4 space-y-2 text-sm text-slate-600">
             {quickLinks.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} className="transition-colors hover:text-emerald-600">
+                <Link href={link.href} className="transition-colors hover:text-amber-600">
                   {link.label}
                 </Link>
               </li>
@@ -47,7 +47,7 @@ export const Footer = () => {
           </div>
         </div>
       </Container>
-      <div className="border-t border-slate-200 bg-slate-50 py-4 text-center text-xs text-slate-500">
+      <div className="border-t border-slate-200 bg-slate-100/70 py-4 text-center text-xs text-slate-500">
         © {currentYear} Rab Noor Pvt Ltd — marblesnearme.com | All rights reserved.
       </div>
     </footer>

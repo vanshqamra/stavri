@@ -32,7 +32,7 @@ export const Navbar = () => {
           <Link
             key={link.href}
             href={link.href}
-            className={`transition-colors hover:text-emerald-600 ${isActive ? 'text-emerald-600' : ''}`}
+            className={`transition-colors hover:text-amber-600 ${isActive ? 'text-amber-600' : ''}`}
             onClick={() => setOpen(false)}
           >
             {link.label}

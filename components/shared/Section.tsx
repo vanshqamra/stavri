@@ -14,7 +14,7 @@ export const Section = ({ id, title, eyebrow, subtitle, children, background = '
     <div className="mx-auto max-w-7xl px-4">
       {(eyebrow || title) && (
         <div className="mb-8 max-w-3xl">
-          {eyebrow && <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-500">{eyebrow}</p>}
+          {eyebrow && <p className="text-sm font-semibold uppercase tracking-[0.2em] text-amber-500">{eyebrow}</p>}
           {title && <h2 className="mt-2 text-3xl font-semibold text-slate-900">{title}</h2>}
           {subtitle && <p className="mt-3 text-lg text-slate-600">{subtitle}</p>}
         </div>

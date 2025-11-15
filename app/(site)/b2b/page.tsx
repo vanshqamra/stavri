@@ -37,6 +37,7 @@ export default function B2BPage() {
       <PageHeader title="B2B Portal" description="Dedicated interface for distributors and stone yards." />
       <Container className="space-y-10 py-16">
         <div className="rounded-3xl border border-slate-200 bg-white p-6">
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-600">Partner portal · preliminary UI</p>
           <h2 className="text-2xl font-semibold text-slate-900">Why distributors join</h2>
           <p className="mt-3 text-sm text-slate-600">
             The portal centralizes pricing, marketing collateral, and logistics updates for partners across Europe, the Middle East, and India.
@@ -50,10 +51,10 @@ export default function B2BPage() {
             </article>
           ))}
         </div>
-        <div className="rounded-3xl border border-dashed border-emerald-200 bg-emerald-50 p-6 text-center">
-          <p className="text-sm uppercase tracking-[0.3em] text-emerald-600">Access</p>
-          <h3 className="mt-2 text-2xl font-semibold text-emerald-900">Invite-only login</h3>
-          <p className="mt-3 text-sm text-emerald-800">Request credentials to browse current stock, book shared containers, and download marketing assets.</p>
+        <div className="rounded-3xl border border-dashed border-amber-200 bg-amber-50 p-6 text-center">
+          <p className="text-sm uppercase tracking-[0.3em] text-amber-600">Access</p>
+          <h3 className="mt-2 text-2xl font-semibold text-amber-900">Invite-only login</h3>
+          <p className="mt-3 text-sm text-amber-800">Request credentials to browse current stock, book shared containers, and download marketing assets.</p>
           <Button href="/b2b/login" className="mt-5">
             Access Portal
           </Button>
