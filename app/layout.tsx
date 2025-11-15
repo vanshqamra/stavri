@@ -2,6 +2,19 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
+import { Playfair_Display, Inter } from 'next/font/google';
+
+const headingFont = Playfair_Display({
+  subsets: ['latin'],
+  weight: ['500', '600', '700'],
+  variable: '--font-heading'
+});
+
+const bodyFont = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-body'
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://marblesnearme.com'),
@@ -21,12 +34,14 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="flex min-h-screen flex-col bg-slate-50 text-slate-900">
-        <Navbar />
-        <main className="flex-1">
-          {children}
-        </main>
-        <Footer />
+      <body className={`${headingFont.variable} ${bodyFont.variable} bg-slate-50 text-slate-900`}>
+        <div className="flex min-h-screen flex-col font-[var(--font-body)]">
+          <Navbar />
+          <main className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </div>
       </body>
     </html>
   );

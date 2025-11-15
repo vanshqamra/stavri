@@ -1,8 +1,5 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { Container } from '@/components/Container';
-import { Button } from '@/components/Button';
-import { cardSurface, sectionHeading as sectionTitle, sectionSubheading as bodyText, smallLabel } from '@/components/layout/styles';
 import { products } from '@/lib/marbles';
 
 export const metadata: Metadata = {
@@ -129,17 +126,39 @@ const featuredMarbles = featuredSlugs
   .map((slug) => products.find((product) => product.slug === slug))
   .filter((product): product is (typeof products)[number] => Boolean(product));
 
-const cardStyles = cardSurface;
+const stats = [
+  {
+    title: 'Headquartered in Kishangarh',
+    description:
+      'Headquartered in Kishangarh with satellite teams in Udaipur and Andhra, we manage block procurement, finishing, and export readiness for India-origin stones.'
+  },
+  {
+    title: 'Athens and Thessaloniki hubs',
+    description:
+      'Our Athens and Thessaloniki hubs receive containers from India, Italy, Spain, and Greece, enabling bonded storage and next-day dispatch into EU markets.'
+  },
+  {
+    title: 'Dedicated logistics desks',
+    description:
+      'Dedicated logistics desks coordinate inland trucking, vessel booking, and customs documentation for both outbound and inbound flows.'
+  }
+];
+
+const sectionHeading = 'text-3xl sm:text-4xl font-semibold font-[var(--font-heading)] tracking-tight text-slate-900';
+const bodyText = 'text-base sm:text-lg leading-relaxed text-slate-700 max-w-2xl';
+const labelText = 'text-xs uppercase tracking-[0.35em] text-slate-500';
+const primaryButtonClass = 'inline-flex items-center justify-center rounded-full bg-slate-900 px-6 py-3 text-sm sm:text-base font-medium text-white hover:bg-slate-800 transition';
+const secondaryButtonClass = 'inline-flex items-center justify-center rounded-full border border-slate-900 px-6 py-3 text-sm sm:text-base font-medium text-slate-900 hover:bg-slate-900 hover:text-white transition';
 
 export default function HomePage() {
   return (
     <main className="bg-white text-slate-900">
-      <section className="border-b border-slate-200 bg-gradient-to-b from-slate-50 to-white">
-        <Container className="py-16 sm:py-20 lg:py-24">
-          <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+      <section className="border-b border-slate-100 bg-gradient-to-b from-slate-50 to-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 space-y-12">
+          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <div className="space-y-6">
-              <p className={smallLabel}>Rab Noor Pvt Ltd · Premium Marble Supply</p>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight">
+              <p className={`${labelText} tracking-[0.3em]`}>Rab Noor Pvt Ltd · marblesnearme.com</p>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold font-[var(--font-heading)] tracking-tight">
                 Premium Indian & European Marble — Delivered with Total Coordination
               </h1>
               <p className={bodyText}>
@@ -147,190 +166,224 @@ export default function HomePage() {
                 civic spaces, and residences receive perfectly matched marble bundles at installation.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Button href="/quote-builder">Start Quote Builder</Button>
-                <Button href="/products" variant="secondary">
+                <Link href="/quote-builder" className={primaryButtonClass}>
+                  Start Quote Builder
+                </Link>
+                <Link href="/products" className={secondaryButtonClass}>
                   Browse Products
-                </Button>
+                </Link>
               </div>
               <p className="text-sm text-slate-500">
                 Based in India & Greece · Serving architects, developers, distributors, and luxury homeowners
               </p>
             </div>
             <div className="space-y-6">
-              <div className="h-48 rounded-2xl bg-slate-100 sm:h-56 lg:h-64" aria-hidden />
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div className="h-24 rounded-2xl bg-slate-100" aria-hidden />
-                <div className="h-24 rounded-2xl bg-slate-100" aria-hidden />
+              <div className="h-52 sm:h-64 lg:h-80 rounded-3xl bg-slate-100" aria-hidden />
+              <div className="grid grid-cols-2 gap-4">
+                <div className="h-24 sm:h-28 rounded-3xl bg-slate-100" aria-hidden />
+                <div className="h-24 sm:h-28 rounded-3xl bg-slate-100" aria-hidden />
               </div>
             </div>
           </div>
-        </Container>
+        </div>
       </section>
 
-      <section className="border-b border-slate-100 py-16 sm:py-20 lg:py-24">
-        <Container>
-            <div className="space-y-4">
-            <p className={smallLabel}>Partnerships</p>
-            <h2 className={sectionTitle}>Who We Serve</h2>
+      <section className="border-b border-slate-100">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 space-y-8">
+          <div className="space-y-4">
+            <p className={labelText}>Rab Noor Pvt Ltd · Premium Marble Supply</p>
+            <h2 className={sectionHeading}>Premium Indian & European Marble — Delivered with Total Coordination</h2>
+            <p className={bodyText}>
+              A single partner orchestrating sourcing, processing, and logistics so your sites receive compliant, ready-to-use marble packages.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+            {stats.map((stat) => (
+              <div
+                key={stat.title}
+                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition"
+              >
+                <p className="text-lg font-semibold font-[var(--font-heading)] text-slate-900">{stat.title}</p>
+                <p className="mt-3 text-sm sm:text-base text-slate-700">{stat.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-slate-100">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 space-y-8">
+          <div className="space-y-4">
+            <p className={labelText}>Partnerships</p>
+            <h2 className={sectionHeading}>Who We Serve</h2>
             <p className={bodyText}>
               Each partner group receives a dedicated desk translating drawings into slab bundles, inspection checkpoints, and
               synchronized delivery plans.
             </p>
           </div>
-          <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {audiences.map((audience) => (
-              <div key={audience.title} className={`${cardStyles} space-y-3`}>
-                <p className="text-xs uppercase tracking-wide text-slate-500">Dedicated Desk</p>
-                <h3 className="text-xl font-semibold">{audience.title}</h3>
-                <p className="text-base text-slate-700 leading-relaxed">{audience.description}</p>
+              <div
+                key={audience.title}
+                className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-sm hover:shadow-md transition space-y-3"
+              >
+                <p className={labelText}>Dedicated Desk</p>
+                <h3 className="text-2xl font-semibold font-[var(--font-heading)]">{audience.title}</h3>
+                <p className="text-base leading-relaxed text-slate-700">{audience.description}</p>
               </div>
             ))}
           </div>
-        </Container>
+        </div>
       </section>
 
-      <section className="border-b border-slate-100 bg-slate-50 py-16 sm:py-20 lg:py-24">
-        <Container>
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+      <section className="border-b border-slate-100 bg-slate-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 space-y-8">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div className="space-y-4">
-              <p className={smallLabel}>Catalogue Preview</p>
-              <h2 className={sectionTitle}>Featured Marbles</h2>
+              <p className={labelText}>Catalogue Preview</p>
+              <h2 className={sectionHeading}>Featured Marbles</h2>
               <p className={bodyText}>
                 Signature stones curated for fast-moving projects. Tap through to explore origin details and descriptors.
               </p>
             </div>
-            <Button href="/products" variant="secondary" className="self-start">
+            <Link href="/products" className={secondaryButtonClass}>
               View All
-            </Button>
+            </Link>
           </div>
-          <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {featuredMarbles.map((marble) => (
-              <article key={marble.slug} className={`${cardStyles} flex flex-col`}>
-                <div className="mb-4 h-32 rounded-xl bg-slate-100" aria-hidden />
+              <article
+                key={marble.slug}
+                className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition flex flex-col"
+              >
+                <div className="h-40 sm:h-48 rounded-2xl bg-slate-100 mb-6" aria-hidden />
                 <span className="inline-flex w-fit rounded-full border border-slate-200 px-3 py-1 text-xs uppercase tracking-[0.35em] text-slate-500">
                   {marble.category}
                 </span>
-                <h3 className="text-2xl font-semibold">{marble.name}</h3>
+                <h3 className="mt-4 text-2xl font-semibold font-[var(--font-heading)]">{marble.name}</h3>
                 <p className="text-sm text-slate-500">{marble.origin}</p>
                 <p className="mt-2 text-base text-slate-700">{marble.baseColor} · {marble.veinStyle}</p>
-                <Link
-                  href={`/products/${marble.slug}`}
-                  className="mt-6 inline-flex items-center text-sm font-semibold text-slate-900"
-                >
+                <Link href={`/products/${marble.slug}`} className="mt-6 text-sm font-semibold text-slate-900">
                   View details →
                 </Link>
               </article>
             ))}
           </div>
-        </Container>
+        </div>
       </section>
 
-      <section className="border-b border-slate-100 py-16 sm:py-20 lg:py-24">
-        <Container>
+      <section className="border-b border-slate-100">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 space-y-8">
           <div className="space-y-4">
-            <p className={smallLabel}>Why Rab Noor</p>
-            <h2 className={sectionTitle}>Reasons partners rely on us</h2>
+            <p className={labelText}>Why Rab Noor</p>
+            <h2 className={sectionHeading}>Reasons partners rely on us</h2>
             <p className={bodyText}>
               A single partner orchestrating sourcing, processing, and logistics so your sites receive compliant, ready-to-use
               marble packages.
             </p>
           </div>
-          <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {valueProps.map((prop) => (
-              <div key={prop.title} className={`${cardStyles} space-y-3`}>
-                <p className="text-xs uppercase tracking-wide text-slate-500">Advantage</p>
-                <h3 className="text-2xl font-semibold">{prop.title}</h3>
+              <div
+                key={prop.title}
+                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition space-y-3"
+              >
+                <p className={labelText}>Advantage</p>
+                <h3 className="text-2xl font-semibold font-[var(--font-heading)]">{prop.title}</h3>
                 <p className="text-base text-slate-700">{prop.description}</p>
               </div>
             ))}
           </div>
-        </Container>
+        </div>
       </section>
 
-      <section className="border-b border-slate-100 bg-slate-50 py-16 sm:py-20 lg:py-24">
-        <Container>
+      <section className="border-b border-slate-100 bg-slate-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 space-y-8">
           <div className="space-y-4">
-            <p className={smallLabel}>Process</p>
-            <h2 className={sectionTitle}>From quarry to project</h2>
+            <p className={labelText}>Process</p>
+            <h2 className={sectionHeading}>From quarry to project</h2>
             <p className={bodyText}>
               Transparent touchpoints keep every stakeholder aligned from the first sample to final installation.
             </p>
           </div>
-          <div className="mt-12">
-            <div className="relative lg:hidden">
-              <span className="absolute left-5 top-0 h-full border-l border-slate-200" aria-hidden />
+          <div className="space-y-10">
+            <div className="relative md:hidden">
+              <span className="absolute left-5 top-0 bottom-0 border-l border-slate-200" aria-hidden />
               <div className="space-y-8">
                 {processSteps.map((step, index) => (
-                  <div key={step.title} className="flex gap-4">
-                    <span className="relative z-10 flex h-10 w-10 items-center justify-center rounded-full border border-slate-300 bg-white text-sm font-semibold text-slate-900">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-                    <div className={`${cardStyles} w-full space-y-2`}>
-                      <h3 className="text-xl font-semibold">{step.title}</h3>
-                      <p className="text-base text-slate-700">{step.description}</p>
+                  <div key={step.title} className="flex items-start gap-4">
+                    <div className="mt-1 h-8 w-8 rounded-full bg-slate-900 text-white flex items-center justify-center text-sm font-semibold">
+                      {index + 1}
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold font-[var(--font-heading)]">{step.title}</h3>
+                      <p className="mt-2 text-sm sm:text-base text-slate-700">{step.description}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="hidden gap-6 lg:grid lg:grid-cols-4">
+            <div className="hidden md:grid md:grid-cols-4 md:gap-8">
               {processSteps.map((step, index) => (
-                <div key={`${step.title}-desktop`} className={`${cardStyles} space-y-3`}>
-                  <div className="flex items-center gap-3 text-sm font-semibold text-slate-500">
-                    <span className="h-1 w-8 bg-slate-300" aria-hidden /> Step {index + 1}
-                  </div>
-                  <h3 className="text-2xl font-semibold">{step.title}</h3>
+                <div key={`${step.title}-desktop`} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-3">
+                  <p className="text-sm font-semibold text-slate-500">Step {index + 1}</p>
+                  <h3 className="text-2xl font-semibold font-[var(--font-heading)]">{step.title}</h3>
                   <p className="text-base text-slate-700">{step.description}</p>
                 </div>
               ))}
             </div>
           </div>
-        </Container>
+        </div>
       </section>
 
-      <section className="border-b border-slate-100 py-16 sm:py-20 lg:py-24">
-        <Container className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-          <div className="space-y-4">
-            <p className={smallLabel}>Global Presence</p>
-            <h2 className={sectionTitle}>India sourcing · Europe distribution</h2>
-            <div className="space-y-6 text-base sm:text-lg leading-relaxed text-slate-700">
-              <p>
-                Headquartered in Kishangarh with satellite teams in Udaipur and Andhra, we manage block procurement, finishing,
-                and export readiness for India-origin stones.
-              </p>
-              <p>
-                Our Athens and Thessaloniki hubs receive containers from India, Italy, Spain, and Greece, enabling bonded
-                storage and next-day dispatch into EU markets.
-              </p>
-              <p>
-                Dedicated logistics desks coordinate inland trucking, vessel booking, and customs documentation for both
-                outbound and inbound flows.
-              </p>
+      <section className="border-b border-slate-100">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 space-y-8">
+          <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
+            <div className="space-y-4">
+              <p className={labelText}>Global Presence</p>
+              <h2 className={sectionHeading}>India sourcing · Europe distribution</h2>
+              <div className="space-y-6 text-base sm:text-lg leading-relaxed text-slate-700">
+                <p>
+                  Headquartered in Kishangarh with satellite teams in Udaipur and Andhra, we manage block procurement,
+                  finishing, and export readiness for India-origin stones.
+                </p>
+                <p>
+                  Our Athens and Thessaloniki hubs receive containers from India, Italy, Spain, and Greece, enabling bonded
+                  storage and next-day dispatch into EU markets.
+                </p>
+                <p>
+                  Dedicated logistics desks coordinate inland trucking, vessel booking, and customs documentation for both
+                  outbound and inbound flows.
+                </p>
+              </div>
+            </div>
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 space-y-6">
+              <h3 className="text-xl font-semibold font-[var(--font-heading)]">Key corridors</h3>
+              <ul className="space-y-4 text-base text-slate-700">
+                {corridors.map((corridor) => (
+                  <li key={corridor} className="flex items-center gap-3">
+                    <span className="h-2 w-2 rounded-full bg-slate-900" aria-hidden />
+                    {corridor}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
-          <div className={`${cardStyles} space-y-6`}>
-            <h3 className="text-xl font-semibold">Key corridors</h3>
-            <ul className="space-y-4 text-base text-slate-700">
-              {corridors.map((corridor) => (
-                <li key={corridor} className="flex items-center gap-3">
-                  <span className="h-2 w-2 rounded-full bg-slate-900" aria-hidden />
-                  {corridor}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </Container>
+        </div>
       </section>
 
-      <section className="border-b border-slate-100 bg-white py-16 sm:py-20 lg:py-24">
-        <Container>
+      <section className="border-b border-slate-100">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 space-y-8">
           <div className="space-y-4">
-            <p className={smallLabel}>Partners speak</p>
-            <h2 className={sectionTitle}>Testimonials</h2>
+            <p className={labelText}>Partners speak</p>
+            <h2 className={sectionHeading}>Testimonials</h2>
           </div>
-          <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
             {testimonials.map((testimonial) => (
-              <div key={testimonial.name} className={`${cardStyles} space-y-5`}>
+              <div
+                key={testimonial.name}
+                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-5 hover:shadow-md transition"
+              >
                 <span className="text-5xl text-slate-200" aria-hidden>
                   “
                 </span>
@@ -343,32 +396,31 @@ export default function HomePage() {
               </div>
             ))}
           </div>
-        </Container>
+        </div>
       </section>
 
       <section className="bg-slate-900 text-white">
-        <Container className="py-16 sm:py-20 lg:py-24">
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:items-center">
-            <div className="space-y-6">
-              <p className="text-xs uppercase tracking-[0.35em] text-slate-300">Plan together</p>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                Ready to plan your marble package?
-              </h2>
-              <p className="text-base sm:text-lg leading-relaxed text-slate-200 max-w-2xl">
-                Share your drawings and quantities — we’ll propose stones, bundles, and shipping plans aligned with your budget
-                and timeline.
-              </p>
-            </div>
-            <div className="flex flex-col gap-4 sm:flex-row sm:justify-end">
-              <Button href="/quote-builder" className="w-full sm:w-auto">
-                Start Quote Builder
-              </Button>
-              <Button href="/contact" variant="secondary" className="w-full sm:w-auto border-white text-white hover:text-slate-900">
-                Contact Team
-              </Button>
-            </div>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 space-y-6">
+          <p className="text-xs uppercase tracking-[0.35em] text-slate-400">Plan together</p>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold font-[var(--font-heading)] tracking-tight">
+            Ready to plan your marble package?
+          </h2>
+          <p className="text-base sm:text-lg leading-relaxed text-slate-200 max-w-3xl">
+            Share your drawings and quantities — we’ll propose stones, bundles, and shipping plans aligned with your budget and
+            timeline.
+          </p>
+          <div className="flex flex-col gap-4 sm:flex-row">
+            <Link href="/quote-builder" className={`${primaryButtonClass} bg-white text-slate-900 hover:bg-slate-100`}>
+              Start Quote Builder
+            </Link>
+            <Link
+              href="/contact"
+              className={`${secondaryButtonClass} border-white text-white hover:text-slate-900 hover:bg-white`}
+            >
+              Contact Team
+            </Link>
           </div>
-        </Container>
+        </div>
       </section>
     </main>
   );
