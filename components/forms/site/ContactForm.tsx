@@ -62,49 +62,50 @@ export const ContactForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="grid gap-4 md:grid-cols-2">
-        <label className="text-sm font-medium text-slate-700">
-          Name
-          <input
-            value={formData.name}
-            onChange={handleChange('name')}
-            required
-            className={`mt-1 w-full rounded-2xl border bg-white px-4 py-2 ${errors.name ? 'border-red-400' : 'border-slate-200'}`}
-          />
-          {errors.name ? <p className="mt-1 text-xs text-red-500">{errors.name}</p> : null}
-        </label>
-        <label className="text-sm font-medium text-slate-700">
-          Email
-          <input
-            type="email"
-            value={formData.email}
-            onChange={handleChange('email')}
-            required
-            className={`mt-1 w-full rounded-2xl border bg-white px-4 py-2 ${errors.email ? 'border-red-400' : 'border-slate-200'}`}
-          />
-          {errors.email ? <p className="mt-1 text-xs text-red-500">{errors.email}</p> : null}
-        </label>
-      </div>
-      <div className="grid gap-4 md:grid-cols-2">
-        <label className="text-sm font-medium text-slate-700">
-          Phone
-          <input
-            value={formData.phone}
-            onChange={handleChange('phone')}
-            className="mt-1 w-full rounded-2xl border border-slate-200 bg-white px-4 py-2"
-          />
-        </label>
-        <label className="text-sm font-medium text-slate-700">
-          Company
-          <input
-            value={formData.company}
-            onChange={handleChange('company')}
-            className="mt-1 w-full rounded-2xl border border-slate-200 bg-white px-4 py-2"
-          />
-        </label>
-      </div>
-      <div className="grid gap-4 md:grid-cols-2">
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="space-y-4">
+        <h3 className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-500">Contact details</h3>
+        <div className="grid gap-4 md:grid-cols-2">
+          <label className="text-sm font-medium text-slate-700">
+            Name
+            <input
+              value={formData.name}
+              onChange={handleChange('name')}
+              required
+              className={`mt-1 w-full rounded-2xl border bg-white px-4 py-2 ${errors.name ? 'border-red-400' : 'border-slate-200'}`}
+            />
+            {errors.name ? <p className="mt-1 text-xs text-red-500">{errors.name}</p> : null}
+          </label>
+          <label className="text-sm font-medium text-slate-700">
+            Email
+            <input
+              type="email"
+              value={formData.email}
+              onChange={handleChange('email')}
+              required
+              className={`mt-1 w-full rounded-2xl border bg-white px-4 py-2 ${errors.email ? 'border-red-400' : 'border-slate-200'}`}
+            />
+            {errors.email ? <p className="mt-1 text-xs text-red-500">{errors.email}</p> : null}
+          </label>
+        </div>
+        <div className="grid gap-4 md:grid-cols-2">
+          <label className="text-sm font-medium text-slate-700">
+            Phone
+            <input
+              value={formData.phone}
+              onChange={handleChange('phone')}
+              className="mt-1 w-full rounded-2xl border border-slate-200 bg-white px-4 py-2"
+            />
+          </label>
+          <label className="text-sm font-medium text-slate-700">
+            Company
+            <input
+              value={formData.company}
+              onChange={handleChange('company')}
+              className="mt-1 w-full rounded-2xl border border-slate-200 bg-white px-4 py-2"
+            />
+          </label>
+        </div>
         <label className="text-sm font-medium text-slate-700">
           Country
           <input
@@ -114,26 +115,29 @@ export const ContactForm = () => {
           />
         </label>
       </div>
-      <label className="text-sm font-medium text-slate-700">
-        Message
-        <textarea
-          value={formData.message}
-          onChange={handleChange('message')}
-          rows={4}
-          className={`mt-1 w-full rounded-2xl border bg-white px-4 py-2 ${errors.message ? 'border-red-400' : 'border-slate-200'}`}
-          required
-        />
-        {errors.message ? <p className="mt-1 text-xs text-red-500">{errors.message}</p> : null}
-      </label>
+      <div className="space-y-3">
+        <h3 className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-500">Project context</h3>
+        <label className="text-sm font-medium text-slate-700">
+          Message
+          <textarea
+            value={formData.message}
+            onChange={handleChange('message')}
+            rows={4}
+            className={`mt-1 w-full rounded-2xl border bg-white px-4 py-2 ${errors.message ? 'border-red-400' : 'border-slate-200'}`}
+            required
+          />
+          {errors.message ? <p className="mt-1 text-xs text-red-500">{errors.message}</p> : null}
+        </label>
+      </div>
       <button
         type="submit"
-        className="w-full rounded-full bg-emerald-600 py-3 text-sm font-semibold text-white hover:bg-emerald-500 disabled:cursor-not-allowed disabled:opacity-60"
+        className="w-full rounded-full bg-amber-600 py-3 text-sm font-semibold text-white hover:bg-amber-500 disabled:cursor-not-allowed disabled:opacity-60"
         disabled={status === 'submitting'}
       >
         {status === 'submitting' ? 'Sending…' : 'Send Message'}
       </button>
       {feedback ? (
-        <p className={`text-sm ${status === 'error' ? 'text-rose-500' : 'text-emerald-600'}`} aria-live="polite">
+        <p className={`text-sm ${status === 'error' ? 'text-rose-500' : 'text-amber-600'}`} aria-live="polite">
           {feedback}
         </p>
       ) : null}

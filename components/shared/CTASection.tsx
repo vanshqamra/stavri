@@ -8,14 +8,14 @@ interface CTAProps {
 }
 
 export const CTASection = ({ title, description, primary, secondary }: CTAProps) => (
-  <div className="bg-gradient-to-r from-emerald-600 to-emerald-700 py-12 text-white">
+  <div className="bg-gradient-to-r from-amber-600 to-amber-700 py-12 text-white">
     <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 md:flex-row md:items-center md:justify-between">
       <div>
         <h3 className="text-3xl font-semibold">{title}</h3>
-        <p className="mt-3 text-emerald-100">{description}</p>
+        <p className="mt-3 text-amber-100">{description}</p>
       </div>
       <div className="flex flex-col gap-4 md:flex-row">
-        <Link href={primary.href} className="rounded-full bg-white/90 px-6 py-3 text-emerald-800 font-semibold">
+        <Link href={primary.href} className="rounded-full bg-white/90 px-6 py-3 text-amber-800 font-semibold">
           {primary.label}
         </Link>
         {secondary && (

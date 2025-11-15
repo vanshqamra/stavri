@@ -23,7 +23,7 @@ export default function ContactPage() {
             <p className="mt-2 text-sm text-slate-600">Rab Noor Pvt Ltd · RIICO Industrial Area, Kishangarh, Rajasthan 305801</p>
             <p className="mt-2 text-sm text-slate-600">Phone: +91 98271 12345</p>
             <p className="text-sm text-slate-600">Email: india@marblesnearme.com</p>
-            <p className="mt-3 text-xs uppercase tracking-[0.3em] text-emerald-500">Services</p>
+            <p className="mt-3 text-xs uppercase tracking-[0.3em] text-amber-500">Services</p>
             <ul className="mt-2 space-y-1 text-sm text-slate-600">
               <li>Quarry inspections & block reservations</li>
               <li>Fabrication scheduling & ISPM 15 packing</li>
@@ -35,7 +35,7 @@ export default function ContactPage() {
             <p className="mt-2 text-sm text-slate-600">Athens Warehouse · 12 Lavriou Ave, Koropi · Thessaloniki Satellite Office</p>
             <p className="mt-2 text-sm text-slate-600">Phone: +30 210 220 7788</p>
             <p className="text-sm text-slate-600">Email: europe@marblesnearme.com</p>
-            <p className="mt-3 text-xs uppercase tracking-[0.3em] text-emerald-500">Services</p>
+            <p className="mt-3 text-xs uppercase tracking-[0.3em] text-amber-500">Services</p>
             <ul className="mt-2 space-y-1 text-sm text-slate-600">
               <li>Bonded warehousing & EU-wide trucking</li>
               <li>Sample dispatch to EU design studios</li>

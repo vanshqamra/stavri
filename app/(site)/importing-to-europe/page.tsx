@@ -77,15 +77,15 @@ export default function ImportingToEuropePage() {
           <div className="mt-6 grid gap-4 md:grid-cols-5">
             {processSteps.map((step, index) => (
               <div key={step} className="rounded-3xl border border-slate-200 bg-white p-4 text-center text-sm text-slate-600">
-                <p className="text-2xl font-semibold text-emerald-500">{index + 1}</p>
+                <p className="text-2xl font-semibold text-amber-500">{index + 1}</p>
                 <p className="mt-2">{step}</p>
               </div>
             ))}
           </div>
         </section>
-        <section className="rounded-3xl border border-emerald-100 bg-emerald-50 p-6 text-center">
-          <h2 className="text-2xl font-semibold text-emerald-900">Talk to our EU Import Specialist</h2>
-          <p className="mt-3 text-sm text-emerald-800">We will review your EORI status, warehouse needs, and delivery timeline, then share a tailored logistics plan.</p>
+        <section className="rounded-3xl border border-amber-100 bg-amber-50 p-6 text-center">
+          <h2 className="text-2xl font-semibold text-amber-900">Talk to our EU Import Specialist</h2>
+          <p className="mt-3 text-sm text-amber-800">We will review your EORI status, warehouse needs, and delivery timeline, then share a tailored logistics plan.</p>
           <Button href="/contact" className="mt-5">
             Schedule a call
           </Button>

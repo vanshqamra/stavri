@@ -87,11 +87,10 @@ export const ArchitectRegistrationForm = () => {
         value={formState.resources}
         onChange={updateField('resources')}
       />
-      <button type="submit" className="w-full rounded-full bg-emerald-600 py-3 text-sm font-semibold text-white">
+      <button type="submit" className="w-full rounded-full bg-amber-600 py-3 text-sm font-semibold text-white">
         Register as an Architect Partner
       </button>
-      {message ? <p className="text-sm text-emerald-700">{message}</p> : null}
-      {/* TODO: Connect to CRM API in next phase. */}
+      {message ? <p className="text-sm text-amber-700">{message}</p> : null}
     </form>
   );
 };

@@ -27,7 +27,7 @@ export default function ProjectsPage() {
                 <img src={project.images[0].url} alt={project.images[0].alt} className="h-full w-full object-cover" />
               </figure>
               <div className="flex flex-1 flex-col p-6">
-                <p className="text-xs uppercase tracking-[0.3em] text-emerald-500">{project.location}</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-amber-500">{project.location}</p>
                 <h2 className="mt-2 text-2xl font-semibold text-slate-900">{project.name}</h2>
                 <p className="mt-2 text-sm text-slate-500">{project.area}</p>
                 <p className="mt-4 flex-1 text-base text-slate-600">{project.description}</p>

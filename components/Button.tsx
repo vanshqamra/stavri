@@ -3,12 +3,13 @@
 import Link from 'next/link';
 import { ButtonHTMLAttributes, ReactNode } from 'react';
 
-const baseStyles = 'inline-flex items-center justify-center rounded-full px-5 py-2 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500';
+const baseStyles =
+  'inline-flex items-center justify-center rounded-full px-6 py-2.5 text-sm font-semibold tracking-wide transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-500 disabled:pointer-events-none disabled:opacity-60';
 
 const variants: Record<string, string> = {
-  primary: 'bg-emerald-600 text-white hover:bg-emerald-500',
-  secondary: 'bg-white text-emerald-600 ring-1 ring-inset ring-emerald-200 hover:ring-emerald-400',
-  ghost: 'text-slate-700 hover:text-emerald-600'
+  primary: 'bg-amber-600 text-white shadow-lg shadow-amber-600/30 hover:-translate-y-0.5 hover:bg-amber-500',
+  secondary: 'bg-white/90 text-amber-700 ring-1 ring-inset ring-amber-200 hover:bg-amber-50 hover:text-amber-800',
+  ghost: 'text-slate-700 hover:text-amber-600'
 };
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

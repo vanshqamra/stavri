@@ -74,7 +74,7 @@ export default function SourcingFromIndiaPage() {
             <ul className="mt-4 space-y-3 text-sm text-slate-600">
               {qualitySteps.map((step) => (
                 <li key={step} className="flex gap-3">
-                  <span className="text-emerald-500">•</span>
+                  <span className="text-amber-500">•</span>
                   <span>{step}</span>
                 </li>
               ))}
@@ -110,9 +110,9 @@ export default function SourcingFromIndiaPage() {
             <p className="mt-4 text-sm text-slate-600">Express shipments arrive in 4–5 days with customs paperwork handled by our courier partners.</p>
           </div>
         </section>
-        <section className="rounded-3xl border border-emerald-100 bg-emerald-50 p-6 text-center">
-          <h2 className="text-2xl font-semibold text-emerald-900">Discuss Sourcing from India</h2>
-          <p className="mt-3 text-sm text-emerald-800">Share your specification, timeline, and destination. We will outline quarry availability, processing slots, and freight schedules.</p>
+        <section className="rounded-3xl border border-amber-100 bg-amber-50 p-6 text-center">
+          <h2 className="text-2xl font-semibold text-amber-900">Discuss Sourcing from India</h2>
+          <p className="mt-3 text-sm text-amber-800">Share your specification, timeline, and destination. We will outline quarry availability, processing slots, and freight schedules.</p>
           <Button href="/contact" className="mt-5">
             Speak with the India Desk
           </Button>

@@ -46,7 +46,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
       <Container className="space-y-10">
         <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Blog', href: '/blog' }, { label: post.title }]} />
         <header className="space-y-4">
-          <p className="text-xs uppercase tracking-[0.3em] text-emerald-500">
+          <p className="text-xs uppercase tracking-[0.3em] text-amber-500">
             {formatDate(post.date)} · {post.readingTime} · {post.author}
           </p>
           <h1 className="text-4xl font-semibold text-slate-900">{post.title}</h1>
@@ -84,15 +84,15 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
           <ul className="mt-4 space-y-3 text-sm text-slate-700">
             {post.keyTakeaways.map((insight) => (
               <li key={insight} className="flex gap-3">
-                <span className="text-emerald-500">•</span>
+                <span className="text-amber-500">•</span>
                 <span>{insight}</span>
               </li>
             ))}
           </ul>
         </section>
-        <section className="rounded-3xl border border-emerald-100 bg-emerald-50 p-6 text-center">
-          <h2 className="text-2xl font-semibold text-emerald-900">Plan your next shipment</h2>
-          <p className="mt-3 text-sm text-emerald-800">
+        <section className="rounded-3xl border border-amber-100 bg-amber-50 p-6 text-center">
+          <h2 className="text-2xl font-semibold text-amber-900">Plan your next shipment</h2>
+          <p className="mt-3 text-sm text-amber-800">
             Our sourcing and logistics desks coordinate quarry allocations, inspection, and delivery timelines worldwide.
           </p>
           <Button href="/quote-builder" className="mt-5">

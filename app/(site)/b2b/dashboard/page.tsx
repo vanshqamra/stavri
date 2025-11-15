@@ -49,7 +49,10 @@ export default function B2BDashboardPage() {
             </tbody>
           </table>
         </div>
-        <p className="text-sm text-slate-500">TODO: Protect this route and connect to live inventory API.</p>
+        <p className="text-sm text-slate-500">
+          Partner access will be gated behind SSO in the next phase; this preview simply illustrates how inventory, pricing,
+          and status updates will display once live data is connected.
+        </p>
       </Container>
     </>
   );

@@ -28,7 +28,7 @@ export const Footer = () => {
           <ul className="mt-4 space-y-2 text-sm">
             {quickLinks.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} className="transition hover:text-emerald-400">
+                <Link href={link.href} className="transition hover:text-amber-400">
                   {link.label}
                 </Link>
               </li>

@@ -31,10 +31,10 @@ export const B2BLoginForm = () => {
         className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-2"
         required
       />
-      <button type="submit" className="w-full rounded-full bg-emerald-600 py-3 text-sm font-semibold text-white">
+      <button type="submit" className="w-full rounded-full bg-amber-600 py-3 text-sm font-semibold text-white">
         Sign In
       </button>
-      {status ? <p className="text-sm text-emerald-600">{status}</p> : null}
+      {status ? <p className="text-sm text-amber-600">{status}</p> : null}
     </form>
   );
 };

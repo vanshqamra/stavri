@@ -8,12 +8,13 @@ interface Props {
 export const ProductCategoryCard = ({ title, description, active, onClick }: Props) => (
   <button
     onClick={onClick}
-    className={`w-full rounded-2xl border px-6 py-5 text-left transition ${
-      active ? 'border-emerald-500 bg-emerald-50 text-emerald-900' : 'border-slate-200 bg-white'
+    className={`w-full rounded-full border px-6 py-3 text-left text-sm font-semibold tracking-wide transition ${
+      active
+        ? 'border-amber-600 bg-amber-50 text-amber-900 shadow-sm'
+        : 'border-transparent bg-slate-100/70 text-slate-600 hover:border-slate-300'
     }`}
   >
-    <p className="text-sm uppercase tracking-[0.3em] text-emerald-500">Category</p>
-    <h3 className="mt-2 text-xl font-semibold">{title}</h3>
-    <p className="mt-2 text-sm text-slate-600">{description}</p>
+    <span className="block text-xs uppercase tracking-[0.3em] text-slate-500">{description}</span>
+    <span className="block text-base text-slate-900">{title}</span>
   </button>
 );
